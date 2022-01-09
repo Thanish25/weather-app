@@ -59,9 +59,15 @@ function setWeatherData(data, place) {
 }
 
 function switchUnits() {
-    if (weather_data[0] === 'N/A') return
-
-    if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
+    if (weather_data[0] === 'N/A') {
+        if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
+            document.getElementById('toggle').innerText = "Switch to Celsius"
+        }
+        else {
+            document.getElementById('toggle').innerText = "Switch to Fahrenheit"
+        }
+    }
+    else if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         let tempF = (((weather_data[0] * 9 / 5) + 32)).toFixed(1)
         let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
         temperatureElement.innerHTML = tempF + " &deg;F"

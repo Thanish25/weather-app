@@ -21,7 +21,7 @@ button {
     background-color: #14435F;
     color: white;
     border-radius: 10px;
-    border-color: #123B55;
+    border: 2px solid #61b1df9a;
     width: 10rem;
 }
 
