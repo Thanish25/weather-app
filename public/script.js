@@ -44,7 +44,11 @@ function setWeatherData(data, place) {
     statusElement.textContent = titleCase(data.weather[0].description)
     windElement.textContent = data.wind.speed + " km/h"
     document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-    
+    updateWeatherElements()
+
+}
+
+function updateWeatherElements() {
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         let tempC = weather_data[0].toFixed(1)
         let feelsLikeC = weather_data[1].toFixed(1)
@@ -61,28 +65,16 @@ function setWeatherData(data, place) {
 }
 
 function switchUnits() {
-    if (weather_data[0] === 'N/A') {
-        if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
-            document.getElementById('toggle').innerText = "Switch to Celsius"
-        }
-        else {
-            document.getElementById('toggle').innerText = "Switch to Fahrenheit"
-        }
-    }
-    else if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
-        let tempF = (((weather_data[0] * 9 / 5) + 32)).toFixed(1)
-        let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
-        temperatureElement.innerHTML = tempF + " &deg;F"
-        feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
+    if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         document.getElementById('toggle').innerText = "Switch to Celsius"
     }
     else {
-        let tempC = weather_data[0].toFixed(1)
-        let feelsLikeC = weather_data[1].toFixed(1)
-        temperatureElement.innerHTML = tempC + " &deg;C"
-        feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
         document.getElementById('toggle').innerText = "Switch to Fahrenheit"
     }
+
+    if (weather_data[0] === 'N/A') return
+    updateWeatherElements()
+
 }
 
 function titleCase(str) {
@@ -91,4 +83,5 @@ function titleCase(str) {
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
     }
     return splitStr.join(' ');
+    
 }
