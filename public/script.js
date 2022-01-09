@@ -20,7 +20,25 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        setWeatherData(data, place.formatted_address)
+        console.log(data)
+        setWeatherData(data)
     })
 
 })
+
+const locationElement = document.querySelector('[data-location]')
+const statusElement = document.querySelector('[data-status]')
+const temperatureElement = document.querySelector('[data-temperature]')
+const feelsLikeElement = document.querySelector('[data-feels-like]')
+// const precipitationElement = document.querySelector('[data-precipitation]')
+const windElement = document.querySelector('[data-wind]')
+
+function setWeatherData(data) {
+    locationElement.textContent = data.name
+    statusElement.textContent = data.weather[0].description
+    temperatureElement.textContent = data.main.temp
+    feelsLikeElement.textContent = data.main.feels_like 
+    windElement.textContent = data.wind.speed + "km/h"
+    document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+
+}
