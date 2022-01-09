@@ -46,14 +46,18 @@ button {
 }
 
 .detail {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     width: 7rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: larger;
+}
+
+.temp-detail {
+    width: 7.5rem;
 }
 
 .title {
