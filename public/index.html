@@ -14,39 +14,41 @@
 
 <body>
   <div class="container">
+    <br \>
+    <div>
+      <div class="city" data-location>Enter A Location</div>
+    </div>
+
     <div class="header">
       <div class="icon-container">
         <img id="icon" src="http://openweathermap.org/img/wn/01d@2x.png"></img>
+        <div class="current" data-status></div>
       </div>
+      
     </div>
 
     <div class="weatherInfo">
-      <div class="overviewinfo">
-        <div class="current" data-status>Enter</div>
-        <div class="city" data-location>A Location</div>
+      <div class="detail">
+        <div class="title">Feels Like</div>
+        <div class="value" data-feels-like>N/A</div>
       </div>
-
-      <div class="specificInfo">
-        <div class="detail">
-          <div class="title">Temperature</div>
-          <div class="value" data-temperature>N/A</div>
-        </div>
-        <div class="detail">
-          <div class="title">Feels Like</div>
-          <div class="value"data-feels-like>N/A</div>
-        </div>
-        <div class="detail">
-          <div class="title" >Wind</div>
-          <div class="value" data-wind>N/A</div>
-        </div>
+      <div class="detail">
+        <div class="title">Temperature</div>
+        <div class="value temp" data-temperature>N/A</div>
+      </div>
+      <div class="detail">
+        <div class="title" >Wind</div>
+        <div class="value" data-wind>N/A</div>
       </div>
     </div>
-
+    <br />
     <div class="search-container">
       <input type="text" class="search" data-city-search placeholder="Enter a location">
     </div> 
-
-    <button id="toggle" onclick="switchUnits()">Switch to Fahrenheit</button>
+    <br />
+    <br />
+    <button id="toggle" onclick="switchUnits()" class="toggle">Switch to Fahrenheit</button>
+    <br />
   </div>
 </body>
 
