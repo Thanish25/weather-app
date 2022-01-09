@@ -1,5 +1,6 @@
 const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
+let weather_data = [0,0]
 
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
@@ -21,8 +22,8 @@ searchBox.addListener('places_changed', () => {
         })
     }).then(res => res.json()).then(data => {
         console.log(data)
-        sessionStorage.setItem('temp', data.main.temp)
-        sessionStorage.setItem('feels_like', data.main.feels_like)
+        weather_data[0] = data.main.temp
+        weather_data[1] = data.main.feels_like
         setWeatherData(data)
     })
 
@@ -42,14 +43,14 @@ function setWeatherData(data) {
     document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
-        let tempC = (sessionStorage.getItem('temp') * 1).toFixed(1)
-        let feelsLikeC = (sessionStorage.getItem('feels_like') * 1).toFixed(1)
-        temperatureElement.innerHTML = tempC + " &deg;C"
+        let tempC = weather_data[0].toFixed(1)
+        let feelsLikeC = weather_data[1].toFixed(1)
+        temperatureElement.innerHTML = tempC+ " &deg;C"
         feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
     }
     else {
-        let tempF = (((sessionStorage.getItem('temp') * 9 / 5) + 32)).toFixed(1)
-        let feelsLikeF = ((sessionStorage.getItem('feels_like') * 9 / 5) + 32).toFixed(1)
+        let tempF = (((weather_data[0] * 9 / 5) + 32)).toFixed(1)
+        let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
         temperatureElement.innerHTML = tempF + " &deg;F"
         feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
     }
@@ -58,15 +59,15 @@ function setWeatherData(data) {
 
 function switchUnits() {
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
-        let tempF = ((sessionStorage.getItem('temp') * 9 / 5) + 32).toFixed(1)
-        let feelsLikeF = ((sessionStorage.getItem('feels_like') * 9 / 5) + 32).toFixed(1)
+        let tempF = (((weather_data[0] * 9 / 5) + 32)).toFixed(1)
+        let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
         temperatureElement.innerHTML = tempF + " &deg;F"
         feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
         document.getElementById('toggle').innerText="Switch to Celsius"
     }
     else {
-        let tempC = (sessionStorage.getItem('temp') * 1).toFixed(1)
-        let feelsLikeC = (sessionStorage.getItem('feels_like') * 1).toFixed(1)
+        let tempC = weather_data[0].toFixed(1)
+        let feelsLikeC = weather_data[1].toFixed(1)
         temperatureElement.innerHTML = tempC + " &deg;C"
         feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
         document.getElementById('toggle').innerText = "Switch to Fahrenheit"

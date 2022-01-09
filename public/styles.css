@@ -15,10 +15,10 @@ button {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: x-small;
-    background-color: rgb(27, 106, 226);
-    color: azure;
+    background-color: #14435F;
+    color: white;
     border-radius: 10px;
-    border-color: rgb(4, 24, 41);
+    border-color: #123B55;
     width: 10rem;
 }
 
@@ -48,7 +48,7 @@ button {
 }
 
 .city {
-    font-size: x-large;
+    font-size: xx-large;
 }
 
 .icon-container {
