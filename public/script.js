@@ -1,6 +1,6 @@
 const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
-let weather_data = [0,0]
+let weather_data = ['N/A','N/A']
 
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
@@ -59,6 +59,8 @@ function setWeatherData(data, place) {
 }
 
 function switchUnits() {
+    if (weather_data[0] === 'N/A') return
+
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         let tempF = (((weather_data[0] * 9 / 5) + 32)).toFixed(1)
         let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
