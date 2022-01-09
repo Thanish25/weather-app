@@ -1,6 +1,6 @@
 const searchElement = document.querySelector('[data-city-search]')
 const searchBox = new google.maps.places.SearchBox(searchElement)
-let weather_data = ['N/A','N/A']
+var weather_data = ['N/A', 'N/A']
 
 searchBox.addListener('places_changed', () => {
     const place = searchBox.getPlaces()[0]
@@ -21,10 +21,12 @@ searchBox.addListener('places_changed', () => {
             longitude: longitude
         })
     }).then(res => res.json()).then(data => {
-        console.log(data)
+        // console.log(data)
         weather_data[0] = data.main.temp
         weather_data[1] = data.main.feels_like
         setWeatherData(data, place.formatted_address)
+        initMap(latitude, longitude)
+
     })
 
 })
@@ -46,7 +48,7 @@ function setWeatherData(data, place) {
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         let tempC = weather_data[0].toFixed(1)
         let feelsLikeC = weather_data[1].toFixed(1)
-        temperatureElement.innerHTML = tempC+ " &deg;C"
+        temperatureElement.innerHTML = tempC + " &deg;C"
         feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
     }
     else {
@@ -72,7 +74,7 @@ function switchUnits() {
         let feelsLikeF = ((weather_data[1] * 9 / 5) + 32).toFixed(1)
         temperatureElement.innerHTML = tempF + " &deg;F"
         feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
-        document.getElementById('toggle').innerText="Switch to Celsius"
+        document.getElementById('toggle').innerText = "Switch to Celsius"
     }
     else {
         let tempC = weather_data[0].toFixed(1)
