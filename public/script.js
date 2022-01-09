@@ -21,6 +21,8 @@ searchBox.addListener('places_changed', () => {
         })
     }).then(res => res.json()).then(data => {
         console.log(data)
+        sessionStorage.setItem('temp', data.main.temp)
+        sessionStorage.setItem('feels_like', data.main.feels_like)
         setWeatherData(data)
     })
 
@@ -35,10 +37,46 @@ const windElement = document.querySelector('[data-wind]')
 
 function setWeatherData(data) {
     locationElement.textContent = data.name
-    statusElement.textContent = data.weather[0].description
-    temperatureElement.textContent = data.main.temp
-    feelsLikeElement.textContent = data.main.feels_like 
-    windElement.textContent = data.wind.speed + "km/h"
+    statusElement.textContent = titleCase(data.weather[0].description)
+    windElement.textContent = data.wind.speed + " km/h"
     document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
+    if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
+        let tempC = (sessionStorage.getItem('temp') * 1).toFixed(1)
+        let feelsLikeC = (sessionStorage.getItem('feels_like') * 1).toFixed(1)
+        temperatureElement.innerHTML = tempC + " &deg;C"
+        feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
+    }
+    else {
+        let tempF = (((sessionStorage.getItem('temp') * 9 / 5) + 32)).toFixed(1)
+        let feelsLikeF = ((sessionStorage.getItem('feels_like') * 9 / 5) + 32).toFixed(1)
+        temperatureElement.innerHTML = tempF + " &deg;F"
+        feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
+    }
+
+}
+
+function switchUnits() {
+    if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
+        let tempF = ((sessionStorage.getItem('temp') * 9 / 5) + 32).toFixed(1)
+        let feelsLikeF = ((sessionStorage.getItem('feels_like') * 9 / 5) + 32).toFixed(1)
+        temperatureElement.innerHTML = tempF + " &deg;F"
+        feelsLikeElement.innerHTML = feelsLikeF + " &deg;F"
+        document.getElementById('toggle').innerText="Switch to Celsius"
+    }
+    else {
+        let tempC = (sessionStorage.getItem('temp') * 1).toFixed(1)
+        let feelsLikeC = (sessionStorage.getItem('feels_like') * 1).toFixed(1)
+        temperatureElement.innerHTML = tempC + " &deg;C"
+        feelsLikeElement.innerHTML = feelsLikeC + " &deg;C"
+        document.getElementById('toggle').innerText = "Switch to Fahrenheit"
+    }
+}
+
+function titleCase(str) {
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    }
+    return splitStr.join(' ');
 }
