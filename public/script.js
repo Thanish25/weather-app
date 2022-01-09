@@ -44,7 +44,7 @@ function setWeatherData(data, place) {
     statusElement.textContent = titleCase(data.weather[0].description)
     windElement.textContent = data.wind.speed + " km/h"
     document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-
+    
     if (document.getElementById("toggle").innerText === "Switch to Fahrenheit") {
         let tempC = weather_data[0].toFixed(1)
         let feelsLikeC = weather_data[1].toFixed(1)

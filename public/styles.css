@@ -4,11 +4,22 @@ button {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: x-small;
-    background-color: #14435F;
+    background-color: #135375;
     color: white;
     border-radius: 10px;
     border: 2px solid #61b1df9a;
     width: 10rem;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: 'Oxygen', sans-serif;
+    align-items: center;
+    text-align: center;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 .weather-container {
