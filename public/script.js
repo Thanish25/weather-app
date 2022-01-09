@@ -24,7 +24,7 @@ searchBox.addListener('places_changed', () => {
         console.log(data)
         weather_data[0] = data.main.temp
         weather_data[1] = data.main.feels_like
-        setWeatherData(data)
+        setWeatherData(data, place.formatted_address)
     })
 
 })
@@ -36,8 +36,9 @@ const feelsLikeElement = document.querySelector('[data-feels-like]')
 // const precipitationElement = document.querySelector('[data-precipitation]')
 const windElement = document.querySelector('[data-wind]')
 
-function setWeatherData(data) {
-    locationElement.textContent = data.name
+function setWeatherData(data, place) {
+    // locationElement.textContent = data.name
+    locationElement.textContent = place
     statusElement.textContent = titleCase(data.weather[0].description)
     windElement.textContent = data.wind.speed + " km/h"
     document.getElementById("icon").src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
